@@ -1,6 +1,7 @@
 ## Big Corp Chart
 ReactJs web app for displaying a a corp's employees through an organizational chart.
 
+Demo: https://org-chart.kperdomoch.now.sh/
 ### The idea behind
 All we are given for each employee are it's (only) parent ID node, in no particular order.
 An organization hierarchy diagram must go from up to bottom... So, given the root node:
