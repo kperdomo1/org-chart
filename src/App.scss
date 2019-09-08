@@ -27,6 +27,21 @@ body {
   cursor: pointer;
 }
 
+@keyframes slideDown {
+  from {
+    transform: translate3d(0, -30%, 0);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+ol {
+  animation: slideDown 600ms;
+}
+
 ol.organizational-chart,
 ol.organizational-chart ol,
 ol.organizational-chart li,
@@ -110,7 +125,7 @@ ol.organizational-chart li > div {
   background-color: #fff;
   border-radius: 3px;
   min-height: 2em;
-  padding: 0.5em 0.5em 0.5em 2.5em;
+  padding: 0.5em 2em 0.5em 2.6em;
 
 }
 
