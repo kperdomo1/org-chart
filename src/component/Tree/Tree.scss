@@ -1,0 +1,180 @@
+$lineSize: 2px;
+$spacing: 1em;
+
+@mixin line-base {
+  background-color: #b7a6aa;
+  content: '';
+  position: absolute;
+}
+
+@mixin draw-line($height, $left, $top, $width) {
+  height: $height;
+  left: $left;
+  top: $top;
+  width: $width;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate3d(0, -30%, 0);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+ol.organizational-chart {
+  & {
+    text-align: center;
+  }
+
+  &, ol, li, li > div {
+    position: relative;
+  }
+
+  &, ol {
+    animation: slideDown 600ms;
+    list-style: none;
+    margin: 0;
+    padding-top: $spacing;
+  }
+
+  ol {
+    &:before, &:after {
+      @include line-base;
+    }
+
+    > li {
+      padding: $spacing 0 0 $spacing;
+    }
+    li {
+      &:before, &:after {
+        @include line-base;
+      }
+
+      > div {
+        &:before, &:after {
+          @include line-base;
+        }
+      }
+    }
+  }
+
+  > li {
+    ol {
+      &:before {
+        @include draw-line($spacing, 50%, 0, $lineSize);
+      }
+      &:after {
+        @include draw-line($lineSize, $lineSize, $spacing, 50%);
+      }
+
+      > li:not(:last-of-type) {
+        &:before {
+          @include draw-line($lineSize, 0, $spacing*2, $spacing);
+        }
+        &:after {
+          @include draw-line(100%, 0, 0, $lineSize);
+        }
+      }
+
+      > li:last-of-type {
+        &:before {
+          @include draw-line($lineSize, 0, $spacing*2, $spacing);
+        }
+        &:after {
+          @include draw-line($spacing*2, 0, 0, $lineSize);
+        }
+      }
+    }
+  }
+
+  li {
+    > div {
+      background-color: #fff;
+      min-height: $spacing*2;
+      padding: $spacing/2 $spacing*2 $spacing/2 $spacing*2.6;
+      margin-right: $spacing;
+      border-radius: 60px;
+      box-shadow: 1px 1px 4px rgba(0,0,0,.18);
+      z-index: 10000;
+
+      & + div {
+        &:after {
+          @include draw-line(calc(100% + #{$spacing}), -$spacing, -$spacing, $lineSize)
+        }
+      }
+
+      &.highlight {
+        text-shadow:0 0 1px black;
+        .avatar {
+          background-color: #1782E5;
+          text-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+/*** MEDIA QUERIES ***/
+@media only screen and ( min-width: 64em ) {
+
+  ol.organizational-chart {
+    margin-left: -$spacing;
+    margin-right: -$spacing;
+    > li {
+      /* first (root) level */
+      > div {
+        display: inline-block;
+        float: none;
+        margin: 0 auto;
+        vertical-align: bottom;
+      }
+      /* rest of levels  */
+      div {
+        margin-bottom: 0;
+        width: fit-content;
+        transition: all 300ms;
+
+        &.highlight {
+          transform: scale(1.05);
+        }
+      }
+
+      /* Rest of levels */
+      > ol {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+
+        &:before, >li:before {
+          @include draw-line($spacing !important, 49.9% !important, 0 !important, $lineSize !important);
+        }
+        &:after {
+          display: none;
+        }
+
+        > li {
+          padding-left: $spacing;
+          padding-right: $spacing;
+          padding-top: $spacing;
+
+          &:first-of-type:not(:only-of-type):after, &:last-of-type:not(:only-of-type):after {
+            @include draw-line($lineSize, inherit, 0, 50%);
+          }
+          &:first-of-type:not(:only-of-type):after {
+            left: 50%;
+          }
+          &:last-of-type:not(:only-of-type):after {
+            left: 0;
+          }
+          & + li:not(:last-of-type):after {
+            @include draw-line($lineSize, 0, 0, 100%);
+          }
+        }
+      }
+    }
+  }
+}

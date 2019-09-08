@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { TreeContext }       from '../../context/TreeContext';
 import Nodes                 from './Nodes';
+import './Tree.scss';
 
 const Tree = () => {
   const { tree, loading } = useContext(TreeContext);
