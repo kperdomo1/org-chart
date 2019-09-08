@@ -5,6 +5,10 @@ import './App.scss';
 
 const App = () => (
   <TreeProvider>
+    <header className="app-header">
+      <a className="logo" href="https://glide.com" />
+    </header>
+    <h1 className="title">Big Corp Chart</h1>
     <Tree />
   </TreeProvider>
 );

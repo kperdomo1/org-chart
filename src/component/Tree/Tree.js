@@ -6,7 +6,7 @@ import './Tree.scss';
 const Tree = () => {
   const { tree, loading } = useContext(TreeContext);
   return (
-    !loading && (
+    !loading ? (
       <div id="wrapper">
         <div id="container">
           <Nodes
@@ -15,6 +15,10 @@ const Tree = () => {
             className="organizational-chart"
           />
         </div>
+      </div>
+    ) : (
+      <div className="centered">
+        <div className="lds-ring"><div /> <div /> <div /> <div /> </div>
       </div>
     )
   );
