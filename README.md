@@ -7,7 +7,7 @@ All we are given for each employee are it's (only) parent ID node, in no particu
 An organization hierarchy diagram must go from up to bottom... So, given the root node:
 
 
-Initial rendering (partial 'level order' traversal), we:
+During initial rendering, we:
 - Fetch the tree root (manager = 0)
 - Fetch the root's children
 - For each of the root's children, we (pre)fetch children nodes.
@@ -16,7 +16,6 @@ This will be used to add "expand" icon to those who have children nodes.
 
 When clicked on children node:
  - Show collapsed nodes and (pre)fetch it's children to add "expand" icon if it corresponds.
-
 
 
 Thus we construct the data structure with parent - children relation:

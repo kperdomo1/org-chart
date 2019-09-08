@@ -32,6 +32,7 @@ const Nodes = ({ nodesId, tree, className }) => {
               children.length > 0 && <ToggleButton expanded={false} />
             )}
           </div>
+          {/*Recursively draw the rest of the nodes*/}
           {expanded && children.length > 0 && !collapsed && <Nodes nodesId={children} tree={tree} />}
         </li>
       ))}
