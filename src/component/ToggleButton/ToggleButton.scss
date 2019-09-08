@@ -1,0 +1,28 @@
+.toggle-btn {
+  position: absolute;
+  left: calc(50% - .5em);
+  border-radius: 50%;
+  width: 1em;
+  background: #fff;
+  height: 1em;
+  border: 1px solid rgba(0,0,0,.18);
+  color: #1782E5;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: zoomIn 600ms;
+
+  @keyframes zoomIn {
+    0% {
+      transform: scale(0);
+    }
+    75% {
+      transform: scale(1.2);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+}

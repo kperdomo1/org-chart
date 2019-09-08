@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #1d1f20;
+  background-color: #eee;
   font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
 }
 
@@ -21,6 +21,10 @@ body {
   float: left;
   padding: 1em;
   width: 100%;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 ol.organizational-chart,
@@ -106,13 +110,17 @@ ol.organizational-chart li > div {
   background-color: #fff;
   border-radius: 3px;
   min-height: 2em;
-  padding: 0.5em;
+  padding: 0.5em 0.5em 0.5em 2.5em;
+
 }
 
 /*** PRIMARY ***/
-ol.organizational-chart > li > div {
-  background-color: #a2ed56;
+ol.organizational-chart > li div {
+  background-color: #fff;
   margin-right: 1em;
+  border-radius: 60px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,.18);
+  z-index: 10000;
 }
 
 ol.organizational-chart > li > div:before {
@@ -151,23 +159,12 @@ ol.organizational-chart > li > ol:after {
   width: 100%;
 }
 
-ol.organizational-chart > li > ol > li > div {
-  background-color: #83e4e2;
-}
-
-/*** TERTIARY ***/
-ol.organizational-chart > li > ol > li > ol > li > div {
-  background-color: #fd6470;
-}
-
-/*** QUATERNARY ***/
-ol.organizational-chart > li > ol > li > ol > li > ol > li > div {
-  background-color: #fca858;
-}
-
-/*** QUINARY ***/
-ol.organizational-chart > li > ol > li > ol > li > ol > li > ol > li > div {
-  background-color: #fddc32;
+ol.organizational-chart > li div.highlight {
+  text-shadow:0 0 1px black;
+  .avatar {
+    background-color: #1782E5;
+    text-shadow: none;
+  }
 }
 
 /*** MEDIA QUERIES ***/
@@ -182,33 +179,18 @@ ol.organizational-chart > li > ol > li > ol > li > ol > li > ol > li > div {
   ol.organizational-chart > li > div {
     display: inline-block;
     float: none;
-    margin: 0 1em 1em 1em;
+    margin: 0 auto;
     vertical-align: bottom;
   }
 
-  ol.organizational-chart > li > div:only-of-type {
+  ol.organizational-chart > li div {
     margin-bottom: 0;
-    width: calc((100% / 1) - 2em - 4px);
-  }
+    width: fit-content;
+    transition: all 300ms;
 
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(2),
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(2) ~ div {
-    width: calc((100% / 2) - 2em - 4px);
-  }
-
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(3),
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(3) ~ div {
-    width: calc((100% / 3) - 2em - 4px);
-  }
-
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(4),
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(4) ~ div {
-    width: calc((100% / 4) - 2em - 4px);
-  }
-
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(5),
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(5) ~ div {
-    width: calc((100% / 5) - 2em - 4px);
+    &.highlight {
+      transform: scale(1.05);
+    }
   }
 
   ol.organizational-chart > li > div:before,
@@ -250,6 +232,7 @@ ol.organizational-chart > li > ol > li > ol > li > ol > li > ol > li > div {
   ol.organizational-chart > li > ol {
     display: flex;
     flex-wrap: nowrap;
+    justify-content: center;
   }
 
   ol.organizational-chart > li > ol:before,
@@ -265,7 +248,6 @@ ol.organizational-chart > li > ol > li > ol > li > ol > li > ol > li > div {
   }
 
   ol.organizational-chart > li > ol > li {
-    flex-grow: 1;
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 1em;

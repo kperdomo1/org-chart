@@ -1,7 +1,7 @@
 import React            from 'react';
 import Tree             from './component/Tree';
 import { TreeProvider } from './context/TreeContext';
-import './App.css';
+import './App.scss';
 
 const App = () => (
   <TreeProvider>

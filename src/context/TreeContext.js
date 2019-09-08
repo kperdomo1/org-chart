@@ -42,12 +42,10 @@ export class TreeProvider extends React.Component {
         tree[nodeId].children.push(child.id);
       });
     }
-    console.log('tree', tree);
     this.setState({ tree, loading: false }, callback);
   };
 
   toggleChildren = (nodeId) => {
-    console.log('nodeId', nodeId);
     const { tree } = this.state;
     tree[nodeId].expanded = !tree[nodeId].expanded;
     // If user expanded node's children, see if we must fetch their children
@@ -58,9 +56,27 @@ export class TreeProvider extends React.Component {
     this.setState({ tree });
   };
 
+  highlight = ev => {
+    const { tree } = this.state;
+    let target = ev.target.id;
+    while (tree[target]) {
+      tree[target].highlighted = true;
+      target = tree[target].node.manager;
+    }
+    this.setState({ tree });
+  };
+
+  unHighlight = () => {
+    const { tree } = this.state;
+    for (const nodeId in tree) {
+      if (nodeId !== 'rootId' && tree.hasOwnProperty(nodeId)) tree[nodeId].highlighted = false;
+    }
+    this.setState({ tree });
+  };
+
   render() {
-    const { state, fetchChildren, toggleChildren } = this;
-    const store = { ...state, fetchChildren, toggleChildren };
+    const { state, fetchChildren, toggleChildren, highlight, unHighlight } = this;
+    const store = { ...state, fetchChildren, toggleChildren, highlight, unHighlight };
     return (
       <TreeContext.Provider value={store}>
         { this.props.children }
