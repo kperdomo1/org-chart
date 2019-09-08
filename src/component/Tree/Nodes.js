@@ -26,11 +26,7 @@ const Nodes = ({ nodesId, tree, className }) => {
           >
             <Avatar name={node.first} />
             {node.first} {node.last}
-            {expanded ? (
-              children.length > 0 && <ToggleButton expanded={true} />
-            ) : (
-              children.length > 0 && <ToggleButton expanded={false} />
-            )}
+            {children.length > 0 && <ToggleButton expanded={expanded} />}
           </div>
           {/*Recursively draw the rest of the nodes*/}
           {expanded && children.length > 0 && !collapsed && <Nodes nodesId={children} tree={tree} />}
